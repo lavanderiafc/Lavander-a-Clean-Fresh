@@ -278,8 +278,6 @@ ul {
 #services {
     padding: 80px 0;
     background-color: var(--light-color);
- position: relative; 
-    z-index: 2; 
 }
 
 .services-grid {
@@ -552,4 +550,5 @@ footer {
         display: none;
     }
 }
+
 
