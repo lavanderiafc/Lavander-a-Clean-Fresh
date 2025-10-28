@@ -2,15 +2,13 @@
   1. Base & Utilidades
   ==================================*/
 :root {
-    --primary-color: #176f7c;
-    --secondary-color: #55b6c0;
+    --primary-color: #176f7c; /* Un azul verdoso que evoca frescura */
+    --secondary-color: #55b6c0; /* Un tono más claro para acentos */
     --dark-color: #1d1d1d;
     --light-color: #f4f4f4;
     --text-color: #333;
     --white: #ffffff;
     --radius: 8px;
-    --navbar-height-mobile: 65px;
-    --bottom-nav-height: 60px;
 }
 
 * {
@@ -25,7 +23,6 @@ body {
     color: var(--text-color);
     background-color: var(--white);
     overflow-x: hidden;
-    padding-bottom: var(--bottom-nav-height);
 }
 
 a {
@@ -97,10 +94,8 @@ ul {
 .navbar {
     background: var(--white);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: sticky;
+    top: 0;
     z-index: 1000;
 }
 
@@ -125,6 +120,11 @@ ul {
     font-size: 1.8rem;
 }
 
+/*==================================
+  2. Navegación (Header)
+  ==================================*/
+/* ... Código anterior ... */
+
 .nav-menu ul {
     display: flex;
 }
@@ -133,31 +133,34 @@ ul {
     color: var(--text-color);
     padding: 10px 15px;
     font-weight: 600;
-    transition: color 0.3s, border-bottom 0.3s;
-    position: relative;
+    transition: color 0.3s, border-bottom 0.3s; /* Aseguramos la transición */
+    position: relative; /* Clave para que la franja inferior se posicione */
 }
 
+/* FRANA INFERIOR DE INDICACIÓN */
 .nav-menu li a::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 15px;
-    width: calc(100% - 30px);
-    height: 3px;
+    left: 15px; /* Empieza donde el padding interno termina */
+    width: calc(100% - 30px); /* Ancho total menos los 15px de padding de cada lado */
+    height: 3px; /* Grosor de la franja */
     background-color: var(--primary-color);
-    transform: scaleX(0);
+    transform: scaleX(0); /* Inicialmente, la franja está oculta */
     transform-origin: center;
     transition: transform 0.3s ease-out;
 }
 
 .nav-menu li a:hover::after, 
 .nav-menu li a.active::after {
-    transform: scaleX(1);
+    transform: scaleX(1); /* Muestra la franja al pasar el ratón o si está activo */
 }
 
 .nav-menu li a:hover {
     color: var(--primary-color);
 }
+
+/* ... Código que sigue (nav-btn, hamburger, media query, etc.) ... */
 
 .hamburger {
     display: none;
@@ -170,6 +173,7 @@ ul {
     margin-left: 20px;
 }
 
+/* Ocultar menú en móvil por defecto */
 @media (max-width: 992px) {
     .nav-menu {
         display: none;
@@ -180,11 +184,12 @@ ul {
     .hamburger {
         display: block;
     }
+    /* Estilo para el menú desplegable (opcional, requiere JS) */
     .nav-menu.active {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: var(--navbar-height-mobile);
+        top: 60px; /* Ajustar a la altura de tu navbar */
         left: 0;
         width: 100%;
         background-color: var(--white);
@@ -195,10 +200,6 @@ ul {
     .nav-menu.active li {
         margin: 10px 0;
     }
-    body {
-        /* Desactivar padding inferior si no hay barra de navegación fija en desktop */
-        padding-bottom: 0;
-    }
 }
 
 /*==================================
@@ -206,16 +207,14 @@ ul {
   ==================================*/
 #hero {
     position: relative;
-    height: 70vh;
+    height: 70vh; /* Ajuste para una vista inicial cómoda */
     background: url('hero-laundry-background.jpg') no-repeat center center/cover;
     color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Corrección de padding superior para compensar el navbar fijo */
-    padding-top: calc(100px + var(--navbar-height-mobile));
-    padding-bottom: 100px;
+    padding: 100px 0;
 }
 
 .hero-overlay {
@@ -224,7 +223,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurecer imagen para mejor lectura */
 }
 
 .hero-content {
@@ -290,17 +289,19 @@ ul {
 
 .card-image {
     position: relative;
+    /* Usa una imagen de fondo o color aquí */
     background: var(--secondary-color);
-    height: 150px;
+    height: 150px; /* Altura para la imagen de placeholder */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* SOLUCIÓN AL PROBLEMA DE SUPERPOSICIÓN EN MÓVIL */
 .price-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 15px; /* Separación del borde superior */
+    right: 15px; /* Separación del borde derecho */
     background-color: var(--primary-color);
     color: var(--white);
     padding: 8px 15px;
@@ -309,6 +310,7 @@ ul {
     font-weight: bold;
     z-index: 20;
 }
+/* FIN SOLUCIÓN */
 
 .card-content {
     padding: 25px;
@@ -318,6 +320,7 @@ ul {
     font-size: 1.5rem;
     color: var(--dark-color);
     margin-bottom: 15px;
+    /* Asegurar que el título tenga suficiente espacio para no colisionar si el badge estuviera cerca */
     padding-top: 5px; 
 }
 
@@ -441,7 +444,7 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0px;
+    padding-bottom: 30px;
 }
 
 .footer-col h4 {
@@ -478,7 +481,7 @@ footer {
 .whatsapp-link {
     display: block;
     margin-top: 15px;
-    color: #25D366;
+    color: #25D366; /* Color de WhatsApp */
     font-weight: bold;
 }
 
@@ -494,28 +497,5 @@ footer {
     color: #aaa;
 }
 
-/*==================================
-  8. Barra de Navegación Móvil Fija (FALTA ESTO EN TU HTML)
-  ==================================*/
-.bottom-nav-mobile {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: var(--bottom-nav-height);
-    background: var(--white);
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0 5px; 
-}
 
-@media (min-width: 993px) {
-    .bottom-nav-mobile {
-        display: none;
-    }
-}
-
+Este es el código que tengo, componlo
