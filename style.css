@@ -1,13 +1,14 @@
 /* ======== VARIABLES GLOBALES Y RESET ======== */
 :root {
-    --primary-color: #f36f21; /* Naranja principal */
-    --primary-hover: #e05a0f;
-    --secondary-color: #6c757d;
-    --dark-color: #343a40;
-    --light-color: #f8f9fa;
+    --primary-color: #1A535C;    /* CAMBIO: Verde Azulado Oscuro (Base del logo) */
+    --primary-hover: #0F373E;    /* CAMBIO: Tono más oscuro para hover */
+    --accent-color: #4ECDC4;     /* CAMBIO: Turquesa claro (Acento, como las burbujas del logo) */
+    --secondary-color: #6c757d;  /* Gris secundario para elementos neutros */
+    --dark-color: #343a40;       /* Gris muy oscuro */
+    --light-color: #f8f9fa;      /* Fondo de secciones claras */
     --white-color: #ffffff;
-    --text-color: #555;
-    --text-light: #777;
+    --text-color: #495057;       /* Gris suave para texto general */
+    --text-light: #777;          /* Gris claro para texto secundario */
     --border-color: #eee;
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
 }
@@ -182,6 +183,7 @@ section {
     background: url('https://images.unsplash.com/photo-1545172242-f3438bdd0203?w=1200') no-repeat center center/cover;
     position: relative;
     display: flex;
+    justify-content: space-between; 
     align-items: center;
     color: var(--white-color);
     padding: 0;
@@ -193,14 +195,38 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro para legibilidad */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
+    max-width: 50%; 
+    flex-shrink: 0;
+    margin-left: 20px; 
+    padding: 80px 0; 
 }
+
+.hero-image-side {
+    position: relative;
+    z-index: 2;
+    flex-grow: 1; 
+    display: flex;
+    justify-content: flex-end; 
+    align-items: flex-end; 
+    height: 100%;
+    max-width: 50%;
+    margin-right: 20px; 
+}
+
+.hero-decoration-img {
+    max-width: 100%; 
+    height: auto;
+    object-fit: contain;
+    opacity: 0.95; 
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); 
+}
+
 
 .hero-content h1 {
     font-size: 3.5rem;
@@ -212,7 +238,7 @@ section {
 .hero-content p {
     font-size: 1.1rem;
     margin: 20px 0 30px;
-    color: var(--light-color);
+    color: var(--white-color);
 }
 
 .btn-large {
@@ -277,7 +303,8 @@ section {
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: rgba(243, 111, 33, 0.9);
+    /* CORREGIDO: Usando el nuevo color de acento */
+    background-color: var(--accent-color); 
     color: var(--white-color);
     padding: 5px 12px;
     border-radius: 20px;
@@ -326,7 +353,8 @@ section {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: #fef3ec; /* Naranja muy claro */
+    /* CORREGIDO: Tono muy claro de verde/azul para fondo de icono */
+    background-color: #E0F2F1; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -337,6 +365,19 @@ section {
 
 .feature-item h3 {
     font-size: 1.3rem;
+}
+
+.why-us-image-container {
+    text-align: center;
+    margin-bottom: 50px; 
+}
+
+.why-us-image {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow); 
 }
 
 /* ======== SECCIÓN TESTIMONIOS ======== */
@@ -358,7 +399,7 @@ section {
 }
 
 .stars {
-    color: #f1c40f; /* Amarillo estrella */
+    color: #f1c40f; 
     margin-bottom: 15px;
     font-size: 1.1rem;
 }
@@ -395,7 +436,7 @@ section {
 
 /* ======== SECCIÓN CTA ======== */
 #cta {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Ahora verde azulado oscuro */
     color: var(--white-color);
     text-align: center;
 }
@@ -502,7 +543,7 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #25D366; /* Color de WhatsApp */
+    color: #25D366; 
     font-weight: 600;
     font-size: 1.1rem;
     transition: opacity 0.3s;
@@ -562,43 +603,29 @@ footer {
 }
 
 /* ======== DISEÑO RESPONSIVE (MÓVIL) ======== */
-@media (max-width: 992px) {
-    .services-grid,
-    .why-us-grid,
-    .testimonials-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 @media (max-width: 768px) {
     .nav-btn {
-        display: none; /* Oculta botón "Llamar Ahora" en menú */
+        display: none; 
     }
 
     .hamburger {
-        display: block; /* Muestra el botón de hamburguesa */
+        display: block; 
     }
 
     .nav-menu {
         position: absolute;
-        top: 100%; /* Justo debajo del header */
+        top: 100%; 
         left: 0;
         width: 100%;
         background-color: var(--white-color);
         box-shadow: 0 10px 10px rgba(0,0,0,0.05);
-        
-        /* Oculto por defecto */
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease-out;
     }
     
     .nav-menu.active {
-        max-height: 500px; /* Muestra el menú */
+        max-height: 500px;
     }
 
     .nav-menu ul {
@@ -611,18 +638,23 @@ footer {
         text-align: center;
     }
     
+    /* Estilos responsive para la sección HERO con imagen lateral */
     #hero {
+        flex-direction: column; 
+        justify-content: center;
         text-align: center;
+        min-height: 70vh; 
     }
 
     .hero-content {
-        padding: 0 20px;
+        max-width: 100%; 
+        padding: 40px 20px;
     }
 
-    .hero-content h1 {
-        font-size: 2.5rem;
+    .hero-image-side {
+        display: none; 
     }
-
+    
     .hero-features {
         justify-content: center;
     }
@@ -658,5 +690,16 @@ footer {
     .footer-col ul {
         text-align: left;
         display: inline-block;
+    }
+}
+
+@media (max-width: 992px) {
+    .services-grid,
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
