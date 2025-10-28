@@ -2,15 +2,15 @@
   1. Base & Utilidades
   ==================================*/
 :root {
-    --primary-color: #176f7c; /* Un azul verdoso que evoca frescura */
-    --secondary-color: #55b6c0; /* Un tono más claro para acentos */
+    --primary-color: #176f7c;
+    --secondary-color: #55b6c0;
     --dark-color: #1d1d1d;
     --light-color: #f4f4f4;
     --text-color: #333;
     --white: #ffffff;
     --radius: 8px;
-    --navbar-height: 70px; /* NUEVO: Variable para altura de la barra superior en móvil */
-    --bottom-nav-height: 60px; /* NUEVO: Variable para altura de la barra inferior en móvil */
+    --navbar-height-mobile: 65px;
+    --bottom-nav-height: 60px;
 }
 
 * {
@@ -25,10 +25,7 @@ body {
     color: var(--text-color);
     background-color: var(--white);
     overflow-x: hidden;
-
-    /* CORRECCIÓN GLOBAL 1: Compensación para la barra inferior fija.
-       Asegura que el scroll no tape la última parte del contenido en móvil. */
-    padding-bottom: var(--bottom-nav-height); 
+    padding-bottom: var(--bottom-nav-height);
 }
 
 a {
@@ -100,14 +97,10 @@ ul {
 .navbar {
     background: var(--white);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    
-    /* CORRECCIÓN 2: Cambiado de 'sticky' a 'fixed' y definido su altura */
-    position: fixed; 
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
-    /* La altura real debe ser calculada por tu contenido, pero la definimos en la variable */
-    height: var(--navbar-height); 
-    
     z-index: 1000;
 }
 
@@ -115,11 +108,8 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Usamos el padding vertical para controlar la altura */
-    padding: 15px 20px; 
+    padding: 15px 20px;
 }
-
-/*... (resto del código de .navbar) ...*/
 
 .logo {
     font-size: 1.5rem;
@@ -135,11 +125,6 @@ ul {
     font-size: 1.8rem;
 }
 
-/*==================================
-  2. Navegación (Header) - Segunda Parte
-  ==================================*/
-/* ... Código anterior ... */
-
 .nav-menu ul {
     display: flex;
 }
@@ -148,34 +133,31 @@ ul {
     color: var(--text-color);
     padding: 10px 15px;
     font-weight: 600;
-    transition: color 0.3s, border-bottom 0.3s; /* Aseguramos la transición */
-    position: relative; /* Clave para que la franja inferior se posicione */
+    transition: color 0.3s, border-bottom 0.3s;
+    position: relative;
 }
 
-/* FRANA INFERIOR DE INDICACIÓN */
 .nav-menu li a::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 15px; /* Empieza donde el padding interno termina */
-    width: calc(100% - 30px); /* Ancho total menos los 15px de padding de cada lado */
-    height: 3px; /* Grosor de la franja */
+    left: 15px;
+    width: calc(100% - 30px);
+    height: 3px;
     background-color: var(--primary-color);
-    transform: scaleX(0); /* Inicialmente, la franja está oculta */
+    transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s ease-out;
 }
 
 .nav-menu li a:hover::after, 
 .nav-menu li a.active::after {
-    transform: scaleX(1); /* Muestra la franja al pasar el ratón o si está activo */
+    transform: scaleX(1);
 }
 
 .nav-menu li a:hover {
     color: var(--primary-color);
 }
-
-/* ... Código que sigue (nav-btn, hamburger, media query, etc.) ... */
 
 .hamburger {
     display: none;
@@ -188,7 +170,6 @@ ul {
     margin-left: 20px;
 }
 
-/* Ocultar menú en móvil por defecto */
 @media (max-width: 992px) {
     .nav-menu {
         display: none;
@@ -199,13 +180,11 @@ ul {
     .hamburger {
         display: block;
     }
-    /* Estilo para el menú desplegable (opcional, requiere JS) */
     .nav-menu.active {
         display: flex;
         flex-direction: column;
         position: absolute;
-        /* Ajustar a la altura de tu navbar (usamos la variable) */
-        top: var(--navbar-height); 
+        top: var(--navbar-height-mobile);
         left: 0;
         width: 100%;
         background-color: var(--white);
@@ -216,29 +195,27 @@ ul {
     .nav-menu.active li {
         margin: 10px 0;
     }
-    
-    /* CORRECCIÓN RESPONSIVA 3: Ocultar la barra inferior en escritorio */
     body {
-        padding-bottom: 0; /* Quita el padding inferior si la barra desaparece en desktop */
+        /* Desactivar padding inferior si no hay barra de navegación fija en desktop */
+        padding-bottom: 0;
     }
 }
-
 
 /*==================================
   3. Hero Section
   ==================================*/
 #hero {
     position: relative;
-    height: 70vh; /* Ajuste para una vista inicial cómoda */
+    height: 70vh;
     background: url('hero-laundry-background.jpg') no-repeat center center/cover;
     color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* CORRECCIÓN 4: Compensación del Header Fijo */
-    /* Añadimos la altura del header al padding superior para empujar el contenido hacia abajo */
-    padding: calc(100px + var(--navbar-height)) 0 100px 0; /* Ajustamos solo el padding superior */
+    /* Corrección de padding superior para compensar el navbar fijo */
+    padding-top: calc(100px + var(--navbar-height-mobile));
+    padding-bottom: 100px;
 }
 
 .hero-overlay {
@@ -247,7 +224,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Oscurecer imagen para mejor lectura */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
@@ -293,4 +270,251 @@ ul {
     background-color: var(--light-color);
 }
 
-/* ... (el resto del código sigue igual) ... */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    position: relative;
+    background: var(--secondary-color);
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    z-index: 20;
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    padding-top: 5px; 
+}
+
+.card-content p {
+    margin-bottom: 15px;
+}
+
+.card-content ul {
+    margin-top: 10px;
+}
+
+.card-content ul li {
+    padding: 5px 0;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.card-content ul li i {
+    color: var(--secondary-color);
+    margin-right: 10px;
+}
+
+/*==================================
+  5. Por Qué Elegirnos
+  ==================================*/
+#why-us {
+    padding: 80px 0;
+}
+
+.why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.icon-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    color: var(--dark-color);
+    margin-bottom: 10px;
+}
+
+/*==================================
+  6. Llamada a la Acción (CTA)
+  ==================================*/
+#cta {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 80px 0;
+    text-align: center;
+}
+
+#cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+#cta p {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.cta-contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.cta-contact-info > div {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 250px;
+}
+
+.cta-contact-info i {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.cta-contact-info h4 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.cta-contact-info span {
+    font-weight: bold;
+}
+
+/*==================================
+  7. Footer
+  ==================================*/
+footer {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding-top: 50px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 30px;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-col a, .footer-col p {
+    color: var(--light-color);
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-col ul li i {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+
+.footer-logo {
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.whatsapp-link {
+    display: block;
+    margin-top: 15px;
+    color: #25D366;
+    font-weight: bold;
+}
+
+.whatsapp-link i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/*==================================
+  8. Barra de Navegación Móvil Fija (FALTA ESTO EN TU HTML)
+  ==================================*/
+.bottom-nav-mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--bottom-nav-height);
+    background: var(--white);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 5px; 
+}
+
+@media (min-width: 993px) {
+    .bottom-nav-mobile {
+        display: none;
+    }
+}
