@@ -120,6 +120,11 @@ ul {
     font-size: 1.8rem;
 }
 
+/*==================================
+  2. Navegación (Header)
+  ==================================*/
+/* ... Código anterior ... */
+
 .nav-menu ul {
     display: flex;
 }
@@ -128,12 +133,34 @@ ul {
     color: var(--text-color);
     padding: 10px 15px;
     font-weight: 600;
-    transition: color 0.3s;
+    transition: color 0.3s, border-bottom 0.3s; /* Aseguramos la transición */
+    position: relative; /* Clave para que la franja inferior se posicione */
+}
+
+/* FRANA INFERIOR DE INDICACIÓN */
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15px; /* Empieza donde el padding interno termina */
+    width: calc(100% - 30px); /* Ancho total menos los 15px de padding de cada lado */
+    height: 3px; /* Grosor de la franja */
+    background-color: var(--primary-color);
+    transform: scaleX(0); /* Inicialmente, la franja está oculta */
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-menu li a:hover::after, 
+.nav-menu li a.active::after {
+    transform: scaleX(1); /* Muestra la franja al pasar el ratón o si está activo */
 }
 
 .nav-menu li a:hover {
     color: var(--primary-color);
 }
+
+/* ... Código que sigue (nav-btn, hamburger, media query, etc.) ... */
 
 .hamburger {
     display: none;
@@ -469,3 +496,4 @@ footer {
     font-size: 0.9rem;
     color: #aaa;
 }
+
