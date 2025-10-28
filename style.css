@@ -25,7 +25,6 @@ body {
     color: var(--text-color);
     background-color: var(--white);
     overflow-x: hidden;
-    /* Ajuste inicial. Se corregirá en media query para móvil. */
     padding-top: var(--navbar-height-desktop); 
     padding-bottom: 0; 
 }
@@ -223,7 +222,6 @@ ul {
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Ajuste superior para que el contenido no quede debajo del navbar fijo */
     padding-top: calc(100px + var(--navbar-height-desktop));
     padding-bottom: 100px;
 }
@@ -550,5 +548,6 @@ footer {
         display: none;
     }
 }
+
 
 
