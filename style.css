@@ -1,8 +1,8 @@
 /* ======== VARIABLES GLOBALES Y RESET ======== */
 :root {
-    --primary-color: #1A535C;    /* CAMBIO: Verde Azulado Oscuro (Base del logo) */
-    --primary-hover: #0F373E;    /* CAMBIO: Tono más oscuro para hover */
-    --accent-color: #4ECDC4;     /* CAMBIO: Turquesa claro (Acento, como las burbujas del logo) */
+    --primary-color: #1A535C;    /* Verde Azulado Oscuro (Base del logo) */
+    --primary-hover: #0F373E;    /* Tono más oscuro para hover */
+    --accent-color: #4ECDC4;     /* Turquesa claro (Acento, como las burbujas del logo) */
     --secondary-color: #6c757d;  /* Gris secundario para elementos neutros */
     --dark-color: #343a40;       /* Gris muy oscuro */
     --light-color: #f8f9fa;      /* Fondo de secciones claras */
@@ -303,7 +303,6 @@ section {
     position: absolute;
     top: 15px;
     right: 15px;
-    /* CORREGIDO: Usando el nuevo color de acento */
     background-color: var(--accent-color); 
     color: var(--white-color);
     padding: 5px 12px;
@@ -353,7 +352,6 @@ section {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    /* CORREGIDO: Tono muy claro de verde/azul para fondo de icono */
     background-color: #E0F2F1; 
     display: flex;
     justify-content: center;
@@ -436,7 +434,7 @@ section {
 
 /* ======== SECCIÓN CTA ======== */
 #cta {
-    background-color: var(--primary-color); /* Ahora verde azulado oscuro */
+    background-color: var(--primary-color);
     color: var(--white-color);
     text-align: center;
 }
